@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import TodoContainer from "./components/TodoContainer/TodoContainer.js";
 
-const reactElement = <p>Hallo aus index.js!</p>; // intern: React.createElement('h1',...)
+//const reactElement = <p>Hallo aus index.js!</p>; // intern: React.createElement('h1',...)
 
 // Rendert unsere Components/React-Elemente im DOM
 // hier wird es an das HTML Element #root hinzugefügt 
@@ -10,7 +10,6 @@ const reactElement = <p>Hallo aus index.js!</p>; // intern: React.createElement(
 ReactDOM.render(
   <React.StrictMode>
     <TodoContainer />
-    {reactElement}
   </React.StrictMode>, 
   document.getElementById('root') 
 );

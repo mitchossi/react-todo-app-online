@@ -28,14 +28,12 @@ class TodoContainer extends React.Component {
   }
 
   render() {
+    // todos={this.state.todos}: Übergibt das
+    // todos Array an die TodoList Component
     return (
       <>
-        <ul>
-          { this.state.todos.map( todo => {
-            return <li>{todo.title}</li>
-          } ) }
-        </ul>
-        <TodoList />
+        <TodoList todos={this.state.todos}/>
+        
       </>
     );
   }

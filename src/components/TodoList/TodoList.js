@@ -4,9 +4,16 @@ import React from "react";
 
 class TodoList extends React.Component {
 
-  render () {
+  render() {
+
+    // this.props.todos: Zugriff auf die
+    // prop "todos"
     return (
-      <p>Ich bin die Todoliste</p>
+      <ul>
+        {this.props.todoProp.map(todo => {
+          return <li>{todo.title}</li>
+        })}
+      </ul>
     )
   }
 }
