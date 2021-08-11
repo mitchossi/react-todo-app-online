@@ -8,9 +8,9 @@ const reactElement = <p>Hallo aus index.js!</p>; // intern: React.createElement(
 // hier wird es an das HTML Element #root hinzugefügt 
 // (siehe public -> index.html -> <body>)
 ReactDOM.render(
-  <>
+  <React.StrictMode>
     <TodoContainer />
     {reactElement}
-  </>, 
+  </React.StrictMode>, 
   document.getElementById('root') 
 );
