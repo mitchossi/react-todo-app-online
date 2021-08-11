@@ -8,10 +8,13 @@ class TodoList extends React.Component {
 
     // this.props.todos: Zugriff auf die
     // prop "todos"
+
+    //unique key/einmaliger key: Hilft sozusagen react
+    // effizienter zu arbeiten
     return (
       <ul>
         {this.props.todoProp.map(todo => {
-          return <li>{todo.title}</li>
+          return <li key={todo.id}>{todo.title}</li>
         })}
       </ul>
     )

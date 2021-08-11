@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../Header/Header.js";
 import TodoList from "../TodoList/TodoList.js";
 
 class TodoContainer extends React.Component {
@@ -32,7 +33,8 @@ class TodoContainer extends React.Component {
     // todos Array an die TodoList Component
     return (
       <>
-        <TodoList todos={this.state.todos}/>
+        <Header />
+        <TodoList todoProp={this.state.todos}/>
         
       </>
     );
