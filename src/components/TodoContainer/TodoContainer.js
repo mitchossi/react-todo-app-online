@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../Header/Header.js";
+import TodoCount from "../TodoCount/TodoCount.js";
 import TodoList from "../TodoList/TodoList.js";
 
 class TodoContainer extends React.Component {
@@ -22,7 +23,7 @@ class TodoContainer extends React.Component {
         {
           id: 3,
           title: "Bewerbung abschicken",
-          completed: false
+          completed: true
         }
       ]
      };
@@ -31,11 +32,12 @@ class TodoContainer extends React.Component {
   render() {
     // todosProp={this.state.todos}: Übergibt das
     // todos-Array an die TodoList Component
+
     return (
       <>
         <Header />
         <TodoList todosProp={this.state.todos}/>
-        
+        <TodoCount todosProp={this.state.todos} />
       </>
     );
   }
