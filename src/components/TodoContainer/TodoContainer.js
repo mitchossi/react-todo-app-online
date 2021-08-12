@@ -25,7 +25,9 @@ class TodoContainer extends React.Component {
           title: "Bewerbung abschicken",
           completed: false
         }
-      ]
+      ],
+      someText: "Hallo Reacter!",
+      names: ["Manuel", "Christian", "Alina"]
      };
   }
 
@@ -36,19 +38,50 @@ class TodoContainer extends React.Component {
     //this.state.todos = []; // SO NICHT
 
     //Funktion zum Ändern des states
-    // erwartet ein Object als Parameter
+    //erwartet ein Object als Parameter
+
+    //Schreibweise ohne Ternären Operator
     this.setState({
       todos: this.state.todos.map( todoObj =>{
-        return {
-          ...todoObj,
-          completed: todoObj.id === id ? !todoObj.completed : todoObj.completed
+        if(todoObj.id === id) {
+          return {
+            ...todoObj,
+            completed: !todoObj.completed
+          }
         }
-      })
+        return todoObj;
+        
+      }) // END of map
     });
+
+    // Schreibweise mit Ternären Operator
+  
+    // this.setState({
+    //   todos: this.state.todos.map( todoObj =>{
+    //     return {
+    //       ...todoObj,
+
+    //       // invertiere completed (false wird true und true wird false)
+    //       // wenn die ID des todoObj der id entspricht, die dem Handler (handleChange)
+    //       // übergeben wurde
+    //       completed: todoObj.id === id ? !todoObj.completed : todoObj.completed
+    //     }
+    //   })
+    // });
+
+
+    //❗Todo❗ in Zukunft: setState updater bzw callback benutzen
+    // Warum? Siehe unten bei Erklärungen
   }
 
   handleBtnClick = () => {
     alert('Click!')
+  }
+
+  handleWordChange = () => {
+    this.setState({
+      someText: "Hallo Welt!"
+    });
   }
 
 
@@ -65,6 +98,15 @@ class TodoContainer extends React.Component {
           handleBtnClickProp={this.handleBtnClick}
         />
         <TodoCount todosProp={this.state.todos} />
+        <div className="nur-zum-lernen">
+          <h3>Nur zum üben</h3>
+          <p>{this.state.someText}</p>
+          <button
+            onClick={this.handleWordChange}
+          >
+            Ändere oberen Text
+          </button>
+        </div>
       </>
     );
   }
@@ -73,15 +115,15 @@ class TodoContainer extends React.Component {
 
 export default TodoContainer; 
 
+// *** Erklärungen ***
 
-
-// Ekläärung Ternärer Operator
+// Ternärer Operator: ? :
 // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
 
-// Kurzschreibweise 
+
 // let completed = todoObj.id === id ? !todoObj.completed : todoObj.completed
 
-//..für;
+// Obere Zeile ist gleichbedeutend mit folgendem Code
 
 // let completed = null;
 // if( todoObj.id === id ) {
