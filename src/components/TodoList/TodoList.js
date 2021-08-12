@@ -1,10 +1,18 @@
 //Aufgabe: Erstelle Component, die <p>Ich bin die TodoListe</p> ausgibt
 // fügt sie TodoContainer hinzu und rendert sie dort
 import React from "react";
+import TodoItem from "../TodoItem/TodoItem.js";
+
+// Prop in functional component
+// const TodoList = (props) => {
+
+//   console.log(props)
+// }; 
 
 class TodoList extends React.Component {
 
   render() {
+    console.log(this.props);
 
     // this.props.todos: Zugriff auf die
     // prop "todos"
@@ -13,8 +21,9 @@ class TodoList extends React.Component {
     // effizienter zu arbeiten
     return (
       <ul>
-        {this.props.todoProp.map(todo => {
-          return <li key={todo.id}>{todo.title}</li>
+        {this.props.todosProp.map(todo => {
+          //console.log('todo.title in this.props.todosProp.map:', todo.title);
+          return <TodoItem key={todo.id}>{todo.title}</TodoItem>
         })}
       </ul>
     )

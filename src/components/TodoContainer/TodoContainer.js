@@ -29,12 +29,12 @@ class TodoContainer extends React.Component {
   }
 
   render() {
-    // todos={this.state.todos}: Übergibt das
-    // todos Array an die TodoList Component
+    // todosProp={this.state.todos}: Übergibt das
+    // todos-Array an die TodoList Component
     return (
       <>
         <Header />
-        <TodoList todoProp={this.state.todos}/>
+        <TodoList todosProp={this.state.todos}/>
         
       </>
     );

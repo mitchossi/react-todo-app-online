@@ -11,5 +11,5 @@ ReactDOM.render(
   <React.StrictMode>
     <TodoContainer />
   </React.StrictMode>, 
-  document.getElementById('root') 
+  document.getElementById('root') // Füge TodoContainer im DOM zum div mit ID "root" hinzu
 );
