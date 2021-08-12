@@ -29,8 +29,22 @@ class TodoContainer extends React.Component {
      };
   }
 
-  handleChange = () => {
-    console.log('checkbox clicked');
+  handleChange = (id) => {
+    console.log('checkbox clicked:', id);
+
+    //Wichtig: State niemals direkt ändern:
+    //this.state.todos = []; // SO NICHT
+
+    //Funktion zum Ändern des states
+    // erwartet ein Object als Parameter
+    this.setState({
+      todos: this.state.todos.map( todoObj =>{
+        return {
+          ...todoObj,
+          completed: todoObj.id === id ? !todoObj.completed : todoObj.completed
+        }
+      })
+    });
   }
 
   handleBtnClick = () => {
@@ -48,6 +62,7 @@ class TodoContainer extends React.Component {
         <TodoList 
           todosProp={this.state.todos}
           handleChangeProp={this.handleChange}
+          handleBtnClickProp={this.handleBtnClick}
         />
         <TodoCount todosProp={this.state.todos} />
       </>
@@ -57,3 +72,20 @@ class TodoContainer extends React.Component {
 }
 
 export default TodoContainer; 
+
+
+
+// Ekläärung Ternärer Operator
+// https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
+
+// Kurzschreibweise 
+// let completed = todoObj.id === id ? !todoObj.completed : todoObj.completed
+
+//..für;
+
+// let completed = null;
+// if( todoObj.id === id ) {
+//   completed =!todoObj.completed
+// } else {
+//   completed = todoObj.completed;
+// }

@@ -5,10 +5,15 @@ const TodoItem = (props) => {
       <input 
         type="checkbox" 
         checked ={props.completed}
-        onChange={ ()=>{props.handleChangeProp()} }
+        onChange={ ()=>{props.handleChangeProp(props.id)} }
       />
       {props.children}
-      <button>Klick mich</button>
+      
+      <button
+        onClick={props.handleBtnClickProp}
+      >
+        Klick mich
+      </button>
     </li>
   )
 };

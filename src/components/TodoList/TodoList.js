@@ -26,8 +26,10 @@ class TodoList extends React.Component {
           return (
             <TodoItem 
               key={todo.id} 
+              id={todo.id}
               completed={todo.completed}
               handleChangeProp={this.props.handleChangeProp}
+              handleBtnClickProp={this.props.handleBtnClickProp}
             >
               {todo.title}
             </TodoItem>
