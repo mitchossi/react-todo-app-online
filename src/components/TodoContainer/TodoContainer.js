@@ -13,7 +13,7 @@ class TodoContainer extends React.Component {
         {
           id: 1,
           title: "React lernen",
-          completed: true
+          completed: false
         },
         {
           id: 2,

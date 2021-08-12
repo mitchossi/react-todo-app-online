@@ -15,7 +15,7 @@ class TodoList extends React.Component {
     console.log(this.props);
 
     // this.props.todos: Zugriff auf die
-    // prop "todos"
+    // prop "todos" => Zugriff auf todo-state bzw.-todo Array
 
     //unique key/einmaliger key: Hilft sozusagen react
     // effizienter zu arbeiten
@@ -23,7 +23,14 @@ class TodoList extends React.Component {
       <ul>
         {this.props.todosProp.map(todo => {
           //console.log('todo.title in this.props.todosProp.map:', todo.title);
-          return <TodoItem key={todo.id}>{todo.title}</TodoItem>
+          return (
+            <TodoItem 
+              key={todo.id} 
+              completed={todo.completed}
+            >
+              {todo.title}
+            </TodoItem>
+          );
         })}
       </ul>
     )
@@ -31,3 +38,24 @@ class TodoList extends React.Component {
 }
 
 export default TodoList;
+
+
+// ERKLÄRUNGEN
+//todo parameter in map (this.props.todosProp.map(todo...)
+// beinhaltet immer das aktuelle todo-Object. Z.B:
+// {
+//   id: 1,
+//   title: "React lernen",
+//   completed: true
+// }
+
+
+// Object in constante
+// let todo = {
+//   id: 1,
+//   title: "React lernen",
+//   completed: true
+// }
+// alert( todo.completed );
+
+

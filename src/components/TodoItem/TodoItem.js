@@ -2,7 +2,10 @@ const TodoItem = (props) => {
 
   return (
     <li>
-      <input type="checkbox" />
+      <input 
+        type="checkbox" 
+        checked ={props.completed}
+      />
       {props.children}
     </li>
   )
