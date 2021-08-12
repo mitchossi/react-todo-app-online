@@ -27,6 +27,7 @@ class TodoList extends React.Component {
             <TodoItem 
               key={todo.id} 
               completed={todo.completed}
+              handleChangeProp={this.props.handleChangeProp}
             >
               {todo.title}
             </TodoItem>

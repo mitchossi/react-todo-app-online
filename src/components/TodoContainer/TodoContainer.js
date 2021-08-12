@@ -13,7 +13,7 @@ class TodoContainer extends React.Component {
         {
           id: 1,
           title: "React lernen",
-          completed: false
+          completed: true
         },
         {
           id: 2,
@@ -23,11 +23,20 @@ class TodoContainer extends React.Component {
         {
           id: 3,
           title: "Bewerbung abschicken",
-          completed: true
+          completed: false
         }
       ]
      };
   }
+
+  handleChange = () => {
+    console.log('checkbox clicked');
+  }
+
+  handleBtnClick = () => {
+    alert('Click!')
+  }
+
 
   render() {
     // todosProp={this.state.todos}: Übergibt das
@@ -36,7 +45,10 @@ class TodoContainer extends React.Component {
     return (
       <>
         <Header />
-        <TodoList todosProp={this.state.todos}/>
+        <TodoList 
+          todosProp={this.state.todos}
+          handleChangeProp={this.handleChange}
+        />
         <TodoCount todosProp={this.state.todos} />
       </>
     );
