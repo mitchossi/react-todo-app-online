@@ -5,6 +5,7 @@ import TodoCount from "../TodoCount/TodoCount.js";
 import TodoList from "../TodoList/TodoList.js";
 import InputTodo from "../InputTodo/InputTodo.js";
 import { v4 as uuidv4 } from "uuid";
+import "./TodoContainer.css";
 
 
 class TodoContainer extends React.Component {
@@ -116,19 +117,21 @@ class TodoContainer extends React.Component {
     // todos-Array an die TodoList Component
 
     return (
-      <>
-        <Header />
-        <InputTodo 
-          addTodoProp={this.addTodo}
-        />
-        <TodoList 
-          todosProp={this.state.todos}
-          handleChangeProp={this.handleChange}
-          delTodoProp={this.delTodo}
-        />
-        <TodoCount todosProp={this.state.todos} />
-        {/* <Practice /> */}
-      </> 
+      <div className="container">
+        <div className="inner">
+          <Header />
+          <InputTodo 
+            addTodoProp={this.addTodo}
+          />
+          <TodoList 
+            todosProp={this.state.todos}
+            handleChangeProp={this.handleChange}
+            delTodoProp={this.delTodo}
+          />
+          <TodoCount todosProp={this.state.todos} />
+          {/* <Practice /> */}
+        </div>
+      </div> 
     );
   }
 

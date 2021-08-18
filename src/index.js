@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import TodoContainer from "./components/TodoContainer/TodoContainer.js";
-
+import "./App.css";
 //const reactElement = <p>Hallo aus index.js!</p>; // intern: React.createElement('h1',...)
 
 // Rendert unsere Components/React-Elemente im DOM
