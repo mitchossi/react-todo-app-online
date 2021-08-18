@@ -29,7 +29,7 @@ class TodoList extends React.Component {
               id={todo.id}
               completed={todo.completed}
               handleChangeProp={this.props.handleChangeProp}
-              handleBtnClickProp={this.props.handleBtnClickProp}
+              delTodoProp={this.props.delTodoProp}
             >
               {todo.title}
             </TodoItem>

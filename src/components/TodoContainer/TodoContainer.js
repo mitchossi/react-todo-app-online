@@ -1,7 +1,9 @@
 import React from "react";
 import Header from "../Header/Header.js";
+import Practice from "../Practice/Practice.js";
 import TodoCount from "../TodoCount/TodoCount.js";
 import TodoList from "../TodoList/TodoList.js";
+import InputTodo from "../InputTodo/InputTodo.js";
 
 class TodoContainer extends React.Component {
 
@@ -25,9 +27,7 @@ class TodoContainer extends React.Component {
           title: "Bewerbung abschicken",
           completed: false
         }
-      ],
-      someText: "Hallo Reacter!",
-      names: ["Manuel", "Christian", "Alina"]
+      ]
      };
   }
 
@@ -74,14 +74,20 @@ class TodoContainer extends React.Component {
     // Warum? Siehe unten bei Erklärungen
   }
 
-  handleBtnClick = () => {
-    alert('Click!')
-  }
+  //ehemals handleBtnClick
+  delTodo = (id) => {
 
-  handleWordChange = () => {
-    this.setState({
-      someText: "Hallo Welt!"
+    // hier speichern wir das state-obj
+    // in einer Variable
+
+    const newTodos = this.state.todos.filter( todo => {
+      return todo.id !== id;
     });
+
+    this.setState( {todos: newTodos} );
+
+    // Todo Zukunft: Hier eigentlich wieder besser: callback 
+    // function als Parameter für setState
   }
 
 
@@ -92,22 +98,15 @@ class TodoContainer extends React.Component {
     return (
       <>
         <Header />
+        <InputTodo />
         <TodoList 
           todosProp={this.state.todos}
           handleChangeProp={this.handleChange}
-          handleBtnClickProp={this.handleBtnClick}
+          delTodoProp={this.delTodo}
         />
         <TodoCount todosProp={this.state.todos} />
-        <div className="nur-zum-lernen">
-          <h3>Nur zum üben</h3>
-          <p>{this.state.someText}</p>
-          <button
-            onClick={this.handleWordChange}
-          >
-            Ändere oberen Text
-          </button>
-        </div>
-      </>
+        {/* <Practice /> */}
+      </> 
     );
   }
 

@@ -10,9 +10,9 @@ const TodoItem = (props) => {
       {props.children}
       
       <button
-        onClick={props.handleBtnClickProp}
+        onClick={ () => {props.delTodoProp(props.id)} }
       >
-        Klick mich
+        Delete
       </button>
     </li>
   )
