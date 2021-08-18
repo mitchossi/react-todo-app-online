@@ -4,6 +4,8 @@ import Practice from "../Practice/Practice.js";
 import TodoCount from "../TodoCount/TodoCount.js";
 import TodoList from "../TodoList/TodoList.js";
 import InputTodo from "../InputTodo/InputTodo.js";
+import { v4 as uuidv4 } from "uuid";
+
 
 class TodoContainer extends React.Component {
 
@@ -13,23 +15,25 @@ class TodoContainer extends React.Component {
     this.state = {
       todos: [
         {
-          id: 1,
+          id: uuidv4(),
           title: "React lernen",
           completed: true
         },
         {
-          id: 2,
+          id: uuidv4(),
           title: "JavaScript wiederholen",
           completed: false
         },
         {
-          id: 3,
+          id: uuidv4(),
           title: "Bewerbung abschicken",
           completed: false
         }
       ]
      };
   }
+
+
 
   handleChange = (id) => {
     console.log('checkbox clicked:', id);
@@ -74,7 +78,23 @@ class TodoContainer extends React.Component {
     // Warum? Siehe unten bei Erklärungen
   }
 
-  //ehemals handleBtnClick
+  addTodo = (title) => {
+    console.log(title);
+
+    const newTodo = {
+      id: uuidv4(),
+      title: title,
+      completed: false
+    };
+    this.setState({
+      todos: [newTodo, ...this.state.todos]
+    });
+
+    // [...this.state.todos, newTodo]
+    // kopiert sozusagen unser todosArray und fügt
+    // unserer newTodo als erstes Element hinzu
+  }
+
   delTodo = (id) => {
 
     // hier speichern wir das state-obj
@@ -98,7 +118,9 @@ class TodoContainer extends React.Component {
     return (
       <>
         <Header />
-        <InputTodo />
+        <InputTodo 
+          addTodoProp={this.addTodo}
+        />
         <TodoList 
           todosProp={this.state.todos}
           handleChangeProp={this.handleChange}

@@ -9,12 +9,45 @@ class InputTodo extends Component {
       title:""
     }
   }
+  onChangeHandler = (e) => {
+    // [e.target.name] : dynamische Vergabe der Eigenschaft
+    // eines Objects
+    this.setState({
+      [e.target.name]: e.target.value
+    });    
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault(); // vermeide Abschicken des Formulars
+    // console.log(this.state.title);
+
+    if(this.state.title.trim() !== "") { //Title ist nicht leer
+      this.props.addTodoProp(this.state.title.trim());
+
+      // Input Feld leeren
+      this.setState({
+        title: ""
+      });
+
+    } else {
+      alert('Bitte Item reinschreiben!')
+    }
+  
+    // trim entfernt Whitespace (z.B. Leerzeichen) am Anfang
+    // und am Ende eines Strings und gibt diesen zurück
+  }
 
   render() {
     return (
-      <form>
-        <input type="text" placeholder="Add Todo..." />
-        <button>Submit</button>
+      <form onSubmit={this.handleSubmit}>
+        <input 
+          type="text"
+          name="title"
+          placeholder="Add Todo..." 
+          value={ this.state.title }
+          onChange={ this.onChangeHandler}
+        />
+        <button>Add +</button>
       </form>
     )
   }
