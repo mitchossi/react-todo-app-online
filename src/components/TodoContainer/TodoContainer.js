@@ -15,24 +15,7 @@ class TodoContainer extends React.Component {
     super();
 
     this.state = {
-      todos: [],
-      OLDTodos: [
-        {
-          id: uuidv4(),
-          title: "React lernen",
-          completed: true
-        },
-        {
-          id: uuidv4(),
-          title: "JavaScript wiederholen",
-          completed: false
-        },
-        {
-          id: uuidv4(),
-          title: "Bewerbung abschicken",
-          completed: false
-        }
-      ]
+      todos: []
      };
   }
 
@@ -117,21 +100,45 @@ class TodoContainer extends React.Component {
     // also zum DOM hinzugefügt wurde
     console.log("%c ComponentDidMount in TodoContainer", "background: #bada55")
 
-    // Wozu:
-    // NEtzwerkanfragen/Daten laden: z.B mit fetch
+    // Wozu: NEtzwerkanfragen/Daten laden: z.B mit fetch
 
     //AB hier: Todo von jsonplasholder fetchen
-    debugger;
-    fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
-      .then( response => {return response.json()} )
-      .then( data => {
-        console.log(data);
-        //Todos aus jsonplaceholder unseres Todos hinzufügen
-        this.setState( {todos: [...data]} );
+    // fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
+    //   .then( response => {return response.json()} )
+    //   .then( data => {
+    //     console.log(data);
+    //     //Todos aus jsonplaceholder unseres Todos hinzufügen
+    //     this.setState( {todos: [...data]} );
+    //   })
+
+    // Daten aus localStorage laden
+    const temp = localStorage.getItem("todos");
+    const loadedTodos = JSON.parse(temp);
+
+    if(loadedTodos) { // loadedTodos ist nicht leer
+      this.setState({
+        todos: loadedTodos
       })
+    }
+    
+
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(previousProps, previousState) {
+    // previousProps enthält die vorherigen Props (vor dem Update. Hier: leer)
+    // previousState enthält den vorherigen State (vor dem Update)
+    // componentDidUpdate wird ausgeführt, wenn die Komponente und 
+    // somit das DOM geändert wurde
+
+    // array können nicht direkt miteinander verglichen werden
+    // => IMMER TRUE: if(previousState.todos !== this.state.todos) {
+    //Stattdessen: Arrays ins String umwandeln 
+    if( JSON.stringify(previousState.todos) !== JSON.stringify(this.state.todos) ) {
+      // Hier ist es sinnvoll, die neuen Daten/State in einer Datenbank zu speichern
+      localStorage.setItem("todos", JSON.stringify(this.state.todos) )
+    }
+    
+    // Mehr zu componentDidUpdate unten
     console.log("%c componentDidUpdate in TodoContainer", "background: #bada55")
   }
 
@@ -179,3 +186,9 @@ export default TodoContainer;
 // } else {
 //   completed = todoObj.completed;
 // }
+
+
+// *** ComponentDidUpdate ***
+// Am besten vergleicht man den vorherigen State mit dem neuen State,
+// damit man potenzielle Endless-Loops vermeidet. Vor allem wird das wichtig
+// wenn man setState in ComponentDidUpdate verwendet
