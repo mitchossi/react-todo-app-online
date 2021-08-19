@@ -19,7 +19,6 @@ class TodoContainer extends React.Component {
      };
   }
 
-
   handleChange = (id) => {
     console.log('checkbox clicked:', id);
 
@@ -94,22 +93,9 @@ class TodoContainer extends React.Component {
     // Todo Zukunft: Hier eigentlich wieder besser: callback 
     // function als Parameter für setState
   }
-
   componentDidMount() {
-    // wird aufgerufen, wenn die Component "gemountet", 
-    // also zum DOM hinzugefügt wurde
-    console.log("%c ComponentDidMount in TodoContainer", "background: #bada55")
-
-    // Wozu: NEtzwerkanfragen/Daten laden: z.B mit fetch
-
-    //AB hier: Todo von jsonplasholder fetchen
-    // fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
-    //   .then( response => {return response.json()} )
-    //   .then( data => {
-    //     console.log(data);
-    //     //Todos aus jsonplaceholder unseres Todos hinzufügen
-    //     this.setState( {todos: [...data]} );
-    //   })
+    // Erklärung siehe unten
+    console.log("%c ComponentDidMount aus TodoContainer ausgeführt", "background: #bada55")
 
     // Daten aus localStorage laden
     const temp = localStorage.getItem("todos");
@@ -125,26 +111,21 @@ class TodoContainer extends React.Component {
   }
 
   componentDidUpdate(previousProps, previousState) {
-    // previousProps enthält die vorherigen Props (vor dem Update. Hier: leer)
-    // previousState enthält den vorherigen State (vor dem Update)
-    // componentDidUpdate wird ausgeführt, wenn die Komponente und 
-    // somit das DOM geändert wurde
+    // Erklärung zu componentDidUpdate siehe unten
+    console.log("%c componentDidUpdate aus TodoContainer asugeführt", "background: #bada55")
 
-    // array können nicht direkt miteinander verglichen werden
-    // => IMMER TRUE: if(previousState.todos !== this.state.todos) {
-    //Stattdessen: Arrays ins String umwandeln 
+    // arrays können nicht direkt miteinander verglichen werden
+    // => if(previousState.todos !== this.state.todos) wäre IMMER true
+    // Stattdessen: Arrays ins String umwandeln 
     if( JSON.stringify(previousState.todos) !== JSON.stringify(this.state.todos) ) {
       // Hier ist es sinnvoll, die neuen Daten/State in einer Datenbank zu speichern
+      // in unserem Fall in localStorage
       localStorage.setItem("todos", JSON.stringify(this.state.todos) )
     }
     
-    // Mehr zu componentDidUpdate unten
-    console.log("%c componentDidUpdate in TodoContainer", "background: #bada55")
   }
 
   render() {
-    // todosProp={this.state.todos}: Übergibt das
-    // todos-Array an die TodoList Component
 
     return (
       <div className="container">
@@ -170,11 +151,12 @@ class TodoContainer extends React.Component {
 
 export default TodoContainer; 
 
+//********************
 // *** Erklärungen ***
+//********************
 
-// Ternärer Operator: ? :
+// *** Ternärer Operator: ? : ***
 // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
-
 
 // let completed = todoObj.id === id ? !todoObj.completed : todoObj.completed
 
@@ -188,7 +170,30 @@ export default TodoContainer;
 // }
 
 
+// *** ComponentDidMount ***
+// componentDidMount() {...}
+  // wird aufgerufen, wenn die Component "gemountet", 
+  // also zum DOM hinzugefügt wurde
+
+  // Wozu verwenden: Netzwerkanfragen/Daten laden: 
+  // z.B mit fetch:
+
+  // fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
+  //   .then( response => {return response.json()} )
+  //   .then( data => {
+  //     //Todos aus jsonplaceholder unseres Todos hinzufügen
+  //     this.setState( {todos: [...data]} );
+  //   })
+
 // *** ComponentDidUpdate ***
-// Am besten vergleicht man den vorherigen State mit dem neuen State,
+// componentDidUpdate(previousProps, previousState) {... }
+
+// componentDidUpdate wird ausgeführt, wenn die Komponente und 
+// somit das DOM geändert wurde
+// previousProps enthält die vorherigen Props,also vor dem Update (hier: leer)
+// previousState enthält den vorherigen State,also vor dem Update
+
+
+// Wichtig: Am besten vergleicht man stets den ursprünglichen State mit dem neuen State,
 // damit man potenzielle Endless-Loops vermeidet. Vor allem wird das wichtig
 // wenn man setState in ComponentDidUpdate verwendet
