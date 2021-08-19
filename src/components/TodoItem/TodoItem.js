@@ -27,7 +27,7 @@ const TodoItem = (props) => {
         checked ={props.completed}
         onChange={ ()=>{props.handleChangeProp(props.id)} }
       />
-      <div onDoubleClick={handleEdit}>
+      <div style={{display:"inline-block"}} onDoubleClick={handleEdit}>
         <span style={props.completed ? completedStyle : null}>
           {props.children}
         </span>

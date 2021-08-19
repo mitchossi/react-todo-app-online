@@ -15,7 +15,8 @@ class TodoContainer extends React.Component {
     super();
 
     this.state = {
-      todos: [
+      todos: [],
+      OLDTodos: [
         {
           id: uuidv4(),
           title: "React lernen",
@@ -34,7 +35,6 @@ class TodoContainer extends React.Component {
       ]
      };
   }
-
 
 
   handleChange = (id) => {
@@ -112,6 +112,28 @@ class TodoContainer extends React.Component {
     // function als Parameter für setState
   }
 
+  componentDidMount() {
+    // wird aufgerufen, wenn die Component "gemountet", 
+    // also zum DOM hinzugefügt wurde
+    console.log("%c ComponentDidMount in TodoContainer", "background: #bada55")
+
+    // Wozu:
+    // NEtzwerkanfragen/Daten laden: z.B mit fetch
+
+    //AB hier: Todo von jsonplasholder fetchen
+    debugger;
+    fetch("https://jsonplaceholder.typicode.com/todos?_limit=10")
+      .then( response => {return response.json()} )
+      .then( data => {
+        console.log(data);
+        //Todos aus jsonplaceholder unseres Todos hinzufügen
+        this.setState( {todos: [...data]} );
+      })
+  }
+
+  componentDidUpdate() {
+    console.log("%c componentDidUpdate in TodoContainer", "background: #bada55")
+  }
 
   render() {
     // todosProp={this.state.todos}: Übergibt das
