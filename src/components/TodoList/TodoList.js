@@ -31,7 +31,7 @@ class TodoList extends React.Component {
               handleChangeProp={this.props.handleChangeProp}
               delTodoProp={this.props.delTodoProp}
             >
-              {todo.title}
+              {todo.title/* wird als prop.children übergeben */} 
             </TodoItem>
           );
         })}
