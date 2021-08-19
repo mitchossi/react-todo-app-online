@@ -6,6 +6,7 @@ import TodoList from "../TodoList/TodoList.js";
 import InputTodo from "../InputTodo/InputTodo.js";
 import { v4 as uuidv4 } from "uuid";
 import "./TodoContainer.css";
+import AlertButton from "../Practice/AlertButton.js";
 
 
 class TodoContainer extends React.Component {
@@ -130,6 +131,7 @@ class TodoContainer extends React.Component {
           />
           <TodoCount todosProp={this.state.todos} />
           {/* <Practice /> */}
+          
         </div>
       </div> 
     );

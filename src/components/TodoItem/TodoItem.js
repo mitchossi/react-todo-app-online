@@ -12,6 +12,13 @@ const TodoItem = (props) => {
   // Alternative zum ternären Operator hinsichtlich completedStyle
   // siehe unten
 
+  const handleEdit = () => {
+    console.log('edit mode activated');
+    // In Zukunft (optional): implementieren
+    // Tutorial: https://ibaslogic.com/how-to-edit-todos-items-in-react/
+
+  };
+
   return (
     <li className={styles.item}>
       <input
@@ -20,7 +27,12 @@ const TodoItem = (props) => {
         checked ={props.completed}
         onChange={ ()=>{props.handleChangeProp(props.id)} }
       />
-      <span style={props.completed ? completedStyle : null}>{props.children}</span>
+      <div onDoubleClick={handleEdit}>
+        <span style={props.completed ? completedStyle : null}>
+          {props.children}
+        </span>
+        {/* Hier später Input Element hinzufügen (für edit Funktion) */}
+      </div>  
       
       <button
         onClick={ () => {props.delTodoProp(props.id)} }
