@@ -107,6 +107,7 @@ class TodoItemWithLifecycleMethods extends Component {
 
 
 export default TodoItem;
+// export default TodoItemWithLifecycleMethods
 
 // props.children:
 // gibt aus, was zwischen dem
