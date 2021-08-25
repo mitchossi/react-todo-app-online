@@ -142,7 +142,7 @@ class TodoContainer extends React.Component {
             delTodoProp={this.delTodo}
           />
           <TodoCount todosProp={this.state.todos} />
-          {/* <Practice /> */}
+          <Practice />
           
         </div>
       </div> 
@@ -152,6 +152,9 @@ class TodoContainer extends React.Component {
 }
 
 export default TodoContainer; 
+
+// ToDo Container umwandeln in Functional Component unter Verwendung
+// von useEffekt-Hook: siehe https://ibaslogic.com/react-hooks-tutorial/#using-the-react-hooks-usestate 
 
 //********************
 // *** Erklärungen ***

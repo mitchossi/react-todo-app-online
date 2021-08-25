@@ -11,8 +11,6 @@ function InputTodo(props) {
   // const title = useState("")[0];
   // const setState = useState("")[1];
 
-  const [text, setText] = useState("Ich bin ein State als Hook!");
-
   const onChangeHandler = (e) => {
     setTitle(e.target.value)
   }
@@ -37,11 +35,7 @@ function InputTodo(props) {
 
   return (
     <>
-      <span 
-        onClick={ ()=>{setText('Ich wurde angeklickt 👽')} }
-      >
-        {text}
-      </span>
+      
       <form
         onSubmit={handleSubmit}
         className="form-container"
