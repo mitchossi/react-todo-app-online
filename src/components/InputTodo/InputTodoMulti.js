@@ -1,66 +1,62 @@
+// Diese Component dient nur zu Übungszwecken
+// sie soll zeigen, wie man mittels Hooks bequem mehrere
+// Formularfelder managen kann hinsichtlich unseres onChangeHandlers
+
 import React, { Component, useState } from "react";
 import "./InputTodo.css";
 
 // als functional component
-function InputTodo(props) {
+function InputTodo () {
 
-  // 1. Variable title => beinhaltet state 
-  // 2. Variable setTitle => beinhaltet function zum Ändern des States
+  // state = {
+  //     title:""
+  //   }
+
   const [title, setTitle] = useState(""); // setzt initial state title auf ""
   // quasi gleichbedeutend mit
   // const title = useState("")[0];
   // const setState = useState("")[1];
 
-  const [text, setText] = useState("Ich bin ein State als Hook!");
-
   const onChangeHandler = (e) => {
-    setTitle(e.target.value)
+    setTitle(e.target.value)  
   }
 
   const handleSubmit = (e) => {
     e.preventDefault(); // vermeide Abschicken des Formulars
+    // console.log(this.state.title);
 
-    console.log(title);
+    // if(this.state.title.trim() !== "") { //Title ist nicht leer
+    //   this.props.addTodoProp(this.state.title.trim());
 
-    if (title.trim() !== "") { //Title ist nicht leer
-      props.addTodoProp(title.trim());
+    //   // Input Feld leeren
+    //   this.setState({
+    //     title: ""
+    //   });
 
-      // Input Feld leeren
-      setTitle("");
-
-    } else {
-      alert('Bitte Item reinschreiben!')
-    }
-
+    // } else {
+    //   alert('Bitte Item reinschreiben!')
+    // }
+  
   }
 
 
-  return (
-    <>
-      <span 
-        onClick={ ()=>{setText('Ich wurde angeklickt 👽')} }
-      >
-        {text}
-      </span>
-      <form
+    return (
+      <form 
         onSubmit={handleSubmit}
         className="form-container"
       >
-
-        <input
+        <input 
           type="text"
           name="title"
-          placeholder="Add Todo..."
-          value={title}
-          onChange={onChangeHandler}
+          placeholder="Add Todo..." 
+          value={ title }
+          onChange={ onChangeHandler}
           className="input-text"
         />
         <button className="input-submit">Add +</button>
-
       </form>
-    </>
-  )
-
+    )
+  
 }
 
 
@@ -72,7 +68,7 @@ class InputTodoClass extends Component {
     super();
 
     this.state = {
-      title: ""
+      title:""
     }
   }
   onChangeHandler = (e) => {
@@ -80,14 +76,14 @@ class InputTodoClass extends Component {
     // eines Objects
     this.setState({
       [e.target.name]: e.target.value
-    });
+    });    
   }
 
   handleSubmit = (e) => {
     e.preventDefault(); // vermeide Abschicken des Formulars
     // console.log(this.state.title);
 
-    if (this.state.title.trim() !== "") { //Title ist nicht leer
+    if(this.state.title.trim() !== "") { //Title ist nicht leer
       this.props.addTodoProp(this.state.title.trim());
 
       // Input Feld leeren
@@ -98,23 +94,23 @@ class InputTodoClass extends Component {
     } else {
       alert('Bitte Item reinschreiben!')
     }
-
+  
     // trim entfernt Whitespace (z.B. Leerzeichen) am Anfang
     // und am Ende eines Strings und gibt diesen zurück
   }
 
   render() {
     return (
-      <form
+      <form 
         onSubmit={this.handleSubmit}
         className="form-container"
       >
-        <input
+        <input 
           type="text"
           name="title"
-          placeholder="Add Todo..."
-          value={this.state.title}
-          onChange={this.onChangeHandler}
+          placeholder="Add Todo..." 
+          value={ this.state.title }
+          onChange={ this.onChangeHandler}
           className="input-text"
         />
         <button className="input-submit">Add +</button>
@@ -126,10 +122,10 @@ export default InputTodo;
 
 // Exkurs: ES7 Syntax (wie im Tutorial)
 
-class InputTodoEs7 extends Component {
+class InputTodoEs7 extends Component { 
 
   state = {
-    title: ""
+    title:""
   }
 
   render() {
