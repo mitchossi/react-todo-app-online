@@ -17,9 +17,11 @@ class TodoContainer extends React.Component {
     this.state = {
       todos: []
      };
+
   }
 
-  handleChange = (id) => {
+
+  handleChange= (id) => {
     console.log('checkbox clicked:', id);
 
     //Wichtig: State niemals direkt ändern:

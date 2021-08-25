@@ -1,3 +1,4 @@
+import {Component} from "react";
 import styles from "./TodoItem.module.css";
 
 const TodoItem = (props) => {
@@ -42,6 +43,68 @@ const TodoItem = (props) => {
     </li>
   )
 };
+
+
+// nachfolgend: Componente als class, um componentWillUnmount()
+// zu zeigen
+class TodoItemWithLifecycleMethods extends Component {
+
+
+  // Alternative zum ternären Operator hinsichtlich completedStyle
+  // siehe unten
+
+  handleEdit = () => {
+    console.log('edit mode activated');
+    // In Zukunft (optional): implementieren
+    // Tutorial: https://ibaslogic.com/how-to-edit-todos-items-in-react/
+
+  }
+
+  componentDidMount() {
+    // Hier z.B. setIntervall starten
+
+  }
+
+  componentWillUnmount() {
+    // wird ausgeführt, before die Komponente entfernt wird
+    alert('TodoItem wird nun entfernt');
+    // Um "Aufräumarbeiten" durchzuführen
+    // z.B. setIntervall anzubrechen
+  }
+
+  render() {
+    const completedStyle = {
+      fontStyle: "italic",
+      color: "#595959",
+      opacity: 0.4,
+      textDecoration: "line-through",
+    }
+    return (
+      <li className={styles.item}>
+        <input
+          className={styles.checkbox}
+          type="checkbox" 
+          checked ={this.props.completed}
+          onChange={ ()=>{this.props.handleChangeProp(this.props.id)} }
+        />
+        <div style={{display:"inline-block"}} onDoubleClick={this.handleEdit}>
+          <span style={this.props.completed ? completedStyle : null}>
+            {this.props.children}
+          </span>
+          {/* Hier später Input Element hinzufügen (für edit Funktion) */}
+        </div>  
+        
+        <button
+          onClick={ () => {this.props.delTodoProp(this.props.id)} }
+        >
+          Delete
+        </button>
+      </li>
+    )
+  }
+};
+
+
 
 export default TodoItem;
 
