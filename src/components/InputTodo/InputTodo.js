@@ -1,5 +1,8 @@
 import React, { Component, useState } from "react";
+import { FaPlusCircle } from "react-icons/fa";
+
 import "./InputTodo.css";
+
 
 // als functional component
 function InputTodo(props) {
@@ -35,12 +38,10 @@ function InputTodo(props) {
 
   return (
     <>
-      
       <form
         onSubmit={handleSubmit}
         className="form-container"
       >
-
         <input
           type="text"
           name="title"
@@ -49,7 +50,9 @@ function InputTodo(props) {
           onChange={onChangeHandler}
           className="input-text"
         />
-        <button className="input-submit">Add +</button>
+        <button className="input-submit">
+          <FaPlusCircle color="darkcyan" size="20px"  />
+        </button>
 
       </form>
     </>

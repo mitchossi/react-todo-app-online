@@ -142,7 +142,7 @@ class TodoContainer extends React.Component {
             delTodoProp={this.delTodo}
           />
           <TodoCount todosProp={this.state.todos} />
-          <Practice />
+          {/* <Practice /> */}
           
         </div>
       </div> 
