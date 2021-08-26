@@ -10,6 +10,7 @@ import AlertButton from "../Practice/AlertButton.js";
 import { Route, Switch } from "react-router-dom";
 import About from "../../pages/About.js";
 import NotMatch from "../../pages/NotMatch.js";
+import Navbar from "../Navbar/Navbar.js";
 
 
 class TodoContainer extends React.Component {
@@ -131,32 +132,35 @@ class TodoContainer extends React.Component {
   render() {
 
     return (
-      <Switch>
-        <Route path="/" exact>
-          <div className="container">
-            <div className="inner">
-              <Header />
-              <InputTodo
-                addTodoProp={this.addTodo}
-              />
-              <TodoList
-                todosProp={this.state.todos}
-                handleChangeProp={this.handleChange}
-                delTodoProp={this.delTodo}
-              />
-              <TodoCount todosProp={this.state.todos} />
-              {/* <Practice /> */}
+      <>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact>
+            <div className="container">
+              <div className="inner">
+                <Header />
+                <InputTodo
+                  addTodoProp={this.addTodo}
+                />
+                <TodoList
+                  todosProp={this.state.todos}
+                  handleChangeProp={this.handleChange}
+                  delTodoProp={this.delTodo}
+                />
+                <TodoCount todosProp={this.state.todos} />
+                {/* <Practice /> */}
 
+              </div>
             </div>
-          </div>
-        </Route>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="*">
-          <NotMatch />
-        </Route>
-      </Switch>
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="*">
+            <NotMatch />
+          </Route>
+        </Switch>
+      </>
     );
   }
 
