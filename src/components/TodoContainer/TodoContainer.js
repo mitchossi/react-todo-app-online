@@ -11,6 +11,7 @@ import { Route, Switch } from "react-router-dom";
 import About from "../../pages/About.js";
 import NotMatch from "../../pages/NotMatch.js";
 import Navbar from "../Navbar/Navbar.js";
+import Contact from "../../pages/Contact.js";
 
 
 class TodoContainer extends React.Component {
@@ -155,6 +156,12 @@ class TodoContainer extends React.Component {
           </Route>
           <Route path="/about">
             <About />
+          </Route>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/contact">
+            <Contact />
           </Route>
           <Route path="*">
             <NotMatch />
