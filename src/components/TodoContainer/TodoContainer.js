@@ -7,21 +7,22 @@ import InputTodo from "../InputTodo/InputTodo.js";
 import { v4 as uuidv4 } from "uuid";
 import "./TodoContainer.css";
 import AlertButton from "../Practice/AlertButton.js";
+import { Route, Switch } from "react-router-dom";
+import About from "../../pages/About.js";
+import NotMatch from "../../pages/NotMatch.js";
 
 
 class TodoContainer extends React.Component {
 
   constructor() {
     super();
-
     this.state = {
       todos: []
-     };
-
+    };
   }
 
 
-  handleChange= (id) => {
+  handleChange = (id) => {
     console.log('checkbox clicked:', id);
 
     //Wichtig: State niemals direkt ändern:
@@ -32,20 +33,20 @@ class TodoContainer extends React.Component {
 
     //Schreibweise ohne Ternären Operator
     this.setState({
-      todos: this.state.todos.map( todoObj =>{
-        if(todoObj.id === id) {
+      todos: this.state.todos.map(todoObj => {
+        if (todoObj.id === id) {
           return {
             ...todoObj,
             completed: !todoObj.completed
           }
         }
         return todoObj;
-        
+
       }) // END of map
     });
 
     // Schreibweise mit Ternären Operator
-  
+
     // this.setState({
     //   todos: this.state.todos.map( todoObj =>{
     //     return {
@@ -86,11 +87,11 @@ class TodoContainer extends React.Component {
     // hier speichern wir das state-obj
     // in einer Variable
 
-    const newTodos = this.state.todos.filter( todo => {
+    const newTodos = this.state.todos.filter(todo => {
       return todo.id !== id;
     });
 
-    this.setState( {todos: newTodos} );
+    this.setState({ todos: newTodos });
 
     // Todo Zukunft: Hier eigentlich wieder besser: callback 
     // function als Parameter für setState
@@ -103,12 +104,12 @@ class TodoContainer extends React.Component {
     const temp = localStorage.getItem("todos");
     const loadedTodos = JSON.parse(temp);
 
-    if(loadedTodos) { // loadedTodos ist nicht leer
+    if (loadedTodos) { // loadedTodos ist nicht leer
       this.setState({
         todos: loadedTodos
       })
     }
-    
+
 
   }
 
@@ -119,39 +120,50 @@ class TodoContainer extends React.Component {
     // arrays können nicht direkt miteinander verglichen werden
     // => if(previousState.todos !== this.state.todos) wäre IMMER true
     // Stattdessen: Arrays ins String umwandeln 
-    if( JSON.stringify(previousState.todos) !== JSON.stringify(this.state.todos) ) {
+    if (JSON.stringify(previousState.todos) !== JSON.stringify(this.state.todos)) {
       // Hier ist es sinnvoll, die neuen Daten/State in einer Datenbank zu speichern
       // in unserem Fall in localStorage
-      localStorage.setItem("todos", JSON.stringify(this.state.todos) )
+      localStorage.setItem("todos", JSON.stringify(this.state.todos))
     }
-    
+
   }
 
   render() {
 
     return (
-      <div className="container">
-        <div className="inner">
-          <Header />
-          <InputTodo 
-            addTodoProp={this.addTodo}
-          />
-          <TodoList 
-            todosProp={this.state.todos}
-            handleChangeProp={this.handleChange}
-            delTodoProp={this.delTodo}
-          />
-          <TodoCount todosProp={this.state.todos} />
-          {/* <Practice /> */}
-          
-        </div>
-      </div> 
+      <Switch>
+        <Route path="/" exact>
+          <div className="container">
+            <div className="inner">
+              <Header />
+              <InputTodo
+                addTodoProp={this.addTodo}
+              />
+              <TodoList
+                todosProp={this.state.todos}
+                handleChangeProp={this.handleChange}
+                delTodoProp={this.delTodo}
+              />
+              <TodoCount todosProp={this.state.todos} />
+              {/* <Practice /> */}
+
+            </div>
+          </div>
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="*">
+          <NotMatch />
+        </Route>
+      </Switch>
     );
   }
 
 }
 
-export default TodoContainer; 
+
+export default TodoContainer;
 
 // ToDo Container umwandeln in Functional Component unter Verwendung
 // von useEffekt-Hook: siehe https://ibaslogic.com/react-hooks-tutorial/#using-the-react-hooks-usestate 
@@ -202,3 +214,48 @@ export default TodoContainer;
 // Wichtig: Am besten vergleicht man stets den ursprünglichen State mit dem neuen State,
 // damit man potenzielle Endless-Loops vermeidet. Vor allem wird das wichtig
 // wenn man setState in ComponentDidUpdate verwendet
+
+// *** React Router ***
+/*
+<Route path="/">
+URL muss mit dem path (hier also "/") ANFANGEN, damit es einen
+MAtch gibt
+<Route path="/" exact> Die Route muss EXAKT dem Path entsprechen
+
+* Route OHNE Switch*
+
+<Route path="/" exact>...</Route>
+<Route path="/about">...</Route>
+<Route path="/contact">...</Route>
+
+Als Pseudocode:
+
+if(path === "/") {
+  render(IndexPage) // "quasi index Seite"
+}
+if(path === "/about") {
+  render(AboutPage)
+}
+if(path === "/contact") {
+  render(ContactPage)
+}
+
+* Route MIT Switch*
+
+<Switch>
+  <Route path="/" exact>...</Route>
+  <Route path="/about">...</Route>
+  <Route path="/contact">...</Route>
+</Switch>
+
+if(path === "/") {
+  render(IndexPage) // "quasi index Seite"
+}
+else if(path === "/about") {
+  render(AboutPage)
+}
+else if(path === "/contact") {
+  render(ContactPage)
+}
+
+*/
